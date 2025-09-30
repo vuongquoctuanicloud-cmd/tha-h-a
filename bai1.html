@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <title>Phương trình hóa học tương tác</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif; padding:20px; background:#f7fbff;}
+    h1{color:#0b57a4}
+    .equation{
+      font-size:24px; margin:18px 0;
+      background:#fff; padding:12px;border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.08);
+    }
+    /* Thẻ chất bấm được */
+    .substance{
+      cursor:pointer;
+      padding:2px 6px;
+      border-radius:6px;
+      display:inline-block;
+      transition:background .12s, transform .08s;
+    }
+    .substance:hover{ background:#e6f0ff; transform:translateY(-1px); }
+    .coeff{ opacity:0.9; margin-right:4px; }
+    /* Hộp thông tin bên phải */
+    #infoBox{
+      position:fixed; right:18px; top:80px; width:320px;
+      background:#fff; padding:12px 14px; border-radius:10px;
+      box-shadow: 0 8px 30px rgba(10,20,40,0.12);
+      font-size:14px; line-height:1.4;
+    }
+    #infoBox h3{ margin:0 0 6px 0; font-size:16px; color:#0b57a4;}
+    #infoBox p{ margin:6px 0; color:#333; }
+    #infoBox small{ color:#555; display:block; margin-top:8px; }
+    .hint{ color:#666; font-size:13px; margin-top:10px;}
+    /* responsive: ẩn hộp khi màn nhỏ */
+    @media(max-width:800px){ #infoBox{ position:static; margin-top:18px; width:auto; } }
+  </style>
+</head>
+<body>
+  <h1>Phương trình hóa học tương tác</h1>
+  <p>Nhấn vào tên chất để xem danh pháp / thông tin.</p>
+
+  <!-- Ví dụ phương trình: 2 H₂ + O₂ → 2 H₂O -->
+  <div class="equation" id="eq1">
+    <span class="coeff">2</span>
+    <span class="substance" data-name="H₂" data-title="Hydrogen" data-info="Nguyên tố: H. Danh pháp: hydro. Khí không màu, dễ cháy.">
+      H<sub>2</sub>
+    </span>
+    <span> + </span>
+    <span class="substance" data-name="O₂" data-title="Oxygen" data-info="Nguyên tố: O. Danh pháp: oxy. Khí cần cho quá trình cháy.">
+      O<sub>2</sub>
+    </span>
+    <span> → </span>
+    <span class="coeff">2</span>
+    <span class="substance" data-name="H₂O" data-title="Water" data-info="Hợp chất: H₂O. Danh pháp: nước. Thường ở dạng lỏng ở điều kiện phòng.">
+      H<sub>2</sub>O
+    </span>
+  </div>
+
+  <!-- Ví dụ 2: phản ứng trung hòa -->
+  <div class="equation" id="eq2">
+    <span class="substance" data-name="HCl" data-title="Hydrochloric acid" data-info="HCl: axit mạnh trong dung dịch nước. Danh pháp: axit clohidric.">
+      HCl
+    </span>
+    <span> + </span>
+    <span class="substance" data-name="NaOH" data-title="Sodium hydroxide" data-info="NaOH: bazơ mạnh. Danh pháp: natri hiđroxit.">
+      NaOH
+    </span>
+    <span> → </span>
+    <span class="substance" data-name="NaCl" data-title="Sodium chloride" data-info="NaCl: muối ăn. Danh pháp: natri clorua.">
+      NaCl
+    </span>
+    <span> + </span>
+    <span class="substance" data-name="H₂O" data-title="Water" data-info="Hợp chất: H₂O. Danh pháp: nước.">
+      H<sub>2</sub>O
+    </span>
+  </div>
+
+  <!-- Hộp hiển thị thông tin -->
+  <aside id="infoBox" aria-live="polite">
+    <h3>Thông tin chất</h3>
+    <p id="infoText">Chưa chọn chất. Nhấn vào một chất trong phương trình để xem danh pháp.</p>
+    <small class="hint">Bạn có thể thêm chất mới bằng thẻ: <code>&lt;span class="substance" data-title="..." data-info="..."&gt;H&lt;sub&gt;2&lt;/sub&gt;&lt;/span&gt;</code></small>
+  </aside>
+
+  <script>
+    // Lấy tất cả thẻ .substance
+    const subs = document.querySelectorAll('.substance');
+    const infoText = document.getElementById('infoText');
+
+    subs.forEach(s => {
+      // click: hiển thị dữ liệu
+      s.addEventListener('click', () => {
+        const title = s.dataset.title || s.dataset.name || s.textContent.trim();
+        const info = s.dataset.info || 'Chưa có thông tin cho chất này.';
+        const name = s.dataset.name || s.textContent.trim();
+
+        infoText.innerHTML = 
+          `<strong>${title}</strong> <span style="color:#666">(${name})</span>
+          <p style="margin-top:8px">${info}</p>`;
+
+        // thêm hiệu ứng chọn
+        subs.forEach(x => x.style.outline = '');
+        s.style.outline = '2px solid rgba(11,87,164,0.18)';
+        s.style.borderRadius = '6px';
+      });
+
+      // optional: Enter key để truy cập (tốt cho accessibility)
+      s.tabIndex = 0;
+      s.addEventListener('keydown', (e) => {
+        if(e.key === 'Enter' || e.key === ' ') { s.click(); e.preventDefault(); }
+      });
+    });
+  </script>
+</body>
+</html>
