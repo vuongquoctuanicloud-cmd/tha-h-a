@@ -9,7 +9,7 @@
     h1{color:#0b57a4}
     .equation{
       font-size:24px; margin:18px 0;
-      background:#fff; padding:12px;border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.08);
+      background:#fff; padding:12px;border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.08); 
     }
     /* Thẻ chất bấm được */
     .substance{
@@ -37,7 +37,7 @@
   </style>
 </head>
 <body>
-  <h1>Phương trình hóa học tương tác</h1>
+  <h1>tính chất hóa học</h1>
   <p>Nhấn vào tên chất để xem danh pháp / thông tin.</p>
 
   <!-- Ví dụ phương trình: 2 H₂ + O₂ → 2 H₂O -->
@@ -75,6 +75,89 @@
       H<sub>2</sub>O
     </span>
   </div>
+  <p> 1.phản ứng đốt cháy ( oxi hóa ko hoàn toàn ) </p>
+  <div class="equation" id="eq3">
+   <span class="substance" data-name="HCOOC2H5" data-title="Etyl fomat" data-info=" HCOOC₂H₅ là este no đơn chức, danh pháp thay thế IUPAC: methyl methanoate.">
+      HCOOC<sub>2</sub>H<sub>5</sub>
+   </span>
+  <span> + </span>
+  <span class="coeff">7/2</span>
+  <span class="substance" data-name="O₂" data-title="Oxy" data-info="Khí cần cho sự cháy.">
+    O<sub>2</sub>
+  </span>
+  <span> → </span>
+  <span class="coeff">3</span>
+  <span class="substance" data-name="CO₂" data-title="Carbon dioxide" data-info="Khí cacbonic.">
+    CO<sub>2</sub>
+  </span>
+  <span> + </span>
+  <span class="coeff">3</span>
+  <span class="substance" data-name="H₂O" data-title="Water" data-info="Nước, sản phẩm cháy của H.">
+    H<sub>2</sub>O
+  </span>
+</div>
+  <p>2.phản ứng thủy phân</p>
+  <div class="equation" id="eq4">
+   <span class="substance" data-name="R1-COO-R2" data-title="este" data-info="là công thức tổng quát các este(ở dạng đơn chức)">
+      R<sub>1</sub>COOR<sub>2</sub>
+   </span>  
+  <span> + </span> 
+  <span class="substance" data-name="H2O" data-title="nước , thế chú em nghĩ nó gọi là gì :))" data-info="nước , tên gọi khác Dihydrogen monoxide , danh pháp IUPAC(ít dùng):Oxidane">
+    H<sub>2</sub>O
+   </span>
+  <span> → </span>
+  <span class="substance" data-name="R1-COOH" data-title="acid carboxyl" data-info="là sản phẩm được sinh ra trong phản ứng thủy phân este trong môi trường acid (H+)">
+    R<sub>1</sub>COOH
+   </span>
+  <span> + </span>
+  <span class="substance" data-name="R2-OH" data-title="alcohol" data-info="alcohol này là sản phẩm sinh ra từ phản ứng thủy phân este trong môi trường acid (H+)">
+    R<sub>2</sub>OH
+  </span>
+</div>
+  <p>ví dụ: thủy phân trong môi trường axit </p>
+  <div class="equation" id="eq5">
+    <span class="substance" data-name="CH3-COO-CH3" data-title="methyl acetate" data-info="acid no đơn chức, danh pháp thay thế IUPAC:methyl ethanoate">
+      CH<sub>3</sub>COOCH<sub>3</sub>
+    </span>
+    <span> + </span>
+    <span class="substance" data-name="H2O" data-title="nước , thế chú em nghĩ nó gọi là gì :))" data-info="nước , tên gọi khác Dihydrogen monoxide , danh pháp IUPAC(ít dùng):Oxidane">
+    H<sub>2</sub>O
+   </span>
+  <span> → </span>
+  <span class="substance" data-name="CH3COOH" data-title="acid acetic" data-info="là acid no đơn chức ,danh pháp thay thế IUPAC:methyl methanoat">
+    CH<sub>3</sub>COOH
+  </span>
+  <span> + </span>
+  <span class="substance" data-name="CH3OH" data-title="methanol(IUPAC)" data-info="là ancol no đơn chức , danh pháp thường: methyl alcohol ">
+    CH<sub>3</sub>OH
+  </span>
+</div>
+  <p>ví dụ: thủy phân tropng môi trường base </p>
+  <div class="equation" id="eq6">
+    <span class="substance" data-name="CH3-COOC-2H5" data-title="etyl axetat" data-info="là ester no đơn chức , danh pháp IUPAC: ethanoate etyl ">
+      CH<sub>3</sub>COOC<sub>2</sub>H<sub>5</sub>
+    </span>  
+  <span>  + </span>
+    <span class="substance" data-name="NaOH" data-title="Natri hydroxit" data-info="là base mạnh của kim loại kiềm , danh pháp IUPAC:sodium hydroxy ">
+      NaOH
+    </span>
+  <span> → </span>
+  <span class="substance" data-name="CH3=COO-Na" data-title="Natri axetat" data-info="là muối của acid tương ứng sinh ra từ phản ứng , danh pháp IUPAC:">
+    CH<sub>3</sub>COONa
+  </span>
+  <span>+4</span>
+    <span class="substance" data-name="C2H5OH" data-title="ethanol(IUPAC)" data-info="cồn được sinh ra sau phản ứng , danh pháp thường:etyl alcohol ">
+      C<sub>2</sub>H<sub>5</sub>OH
+    </span>
+    </div>
+    <p>3. các phản ứng, tính chất đặc biệt khác của este</p>
+    <p>a.<small>với ester của Fomic acid </small></p>
+   <p style="font-size: 10px;">_ tham gia phản ứng tráng bạc </p>
+   <p style="font-size: 12px;">b. ester ko no</p>
+   <p style="font-size: 10px;">_làm mất màu dung dịch brom mà KMnO4 </p>
+   <p style="font-size: 10px;">_tham gia phản ứng trùng hợp </p>
+   <p style="font-size: 12px;">c.ester đa chức</p>
+   <p style="font-size: 10px;">_ là thành phần có trong acid béo</p>
 
   <!-- Hộp hiển thị thông tin -->
   <aside id="infoBox" aria-live="polite">
