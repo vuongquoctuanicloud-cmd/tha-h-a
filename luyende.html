@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Ngân hàng đề luyện tập</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <p style="font-size:40px;">ĐỀ HÓA + ĐÁP ÁN FULL HD KO CHE</p>
+
+<style>
+.exam-item{
+  background:#fff;
+  padding:14px 18px;
+  margin:14px 0;
+  border-radius:12px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+  transition:0.3s;
+}
+
+.exam-item.active{
+  box-shadow:0 10px 28px rgba(11,87,164,0.15);
+}
+
+.exam-header{
+  cursor:pointer;
+  font-weight:bold;
+  color:#0b57a4;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.exam-content{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height 0.5s ease, opacity 0.4s ease;
+  opacity:0;
+}
+
+.exam-content.open{
+  max-height:500px;
+  opacity:1;
+  margin-top:12px;
+}
+
+.exam-content a{
+  display:inline-block;
+  margin:6px 10px 6px 0;
+  padding:6px 12px;
+  background:#e6f0ff;
+  border-radius:6px;
+  text-decoration:none;
+  color:#0b57a4;
+  transition:0.2s;
+}
+
+.exam-content a:hover{
+  background:#0b57a4;
+  color:#fff;
+}
+
+.timer{
+  font-size:14px;
+  color:#444;
+  margin-top:8px;
+}
+.start-btn{
+  padding:4px 10px;
+  background:#0b57a4;
+  color:white;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  margin-top:6px;
+}
+</style>
+<style>
+ body{
+    background: linear-gradient(135deg,#eef5ff,#dbe9ff);
+    font-family: Arial, Helvetica, sans-serif;
+    margin:0;
+    padding:30px;
+}
+
+/* Khung chứa nội dung */
+.exam-item{
+    background:white;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.15);
+    margin-bottom:20px;
+    overflow:hidden;
+}
+.exam-header{
+    background: linear-gradient(90deg,#4facfe,#00c6ff);
+    color:white;
+    padding:15px;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.exam-header:hover{
+    background: linear-gradient(90deg,#43e97b,#38f9d7);
+}
+.exam-content{
+    padding:15px;
+}
+
+.exam-content a{
+    display:inline-block;
+    background:#4CAF50;
+    color:white;
+    padding:8px 14px;
+    margin:5px;
+    border-radius:6px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.exam-content a:hover{
+    background:#2e7d32;
+}
+.start-btn{
+    background:#ff9800;
+    color:white;
+    border:none;
+    padding:10px 16px;
+    border-radius:6px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.start-btn:hover{
+    background:#e68900;
+}
+.timer{
+    margin-top:10px;
+    font-weight:bold;
+    color:#e53935;
+}
+</style>
+
+<div class="exam-item">
+  <div class="exam-header" onclick="toggleExam('exam1', 45)">
+    📘 Đề số 1 
+    <span>⏱ 45 phút</span>
+  </div>
+  <div class="exam-content" id="exam1">
+    <a href="folder_de/de1.pdf" target="_blank">📄 Mở đề</a>
+    <a href="folder_de/de1_dapan.pdf" target="_blank">📘 Mở đề có đáp án</a>
+
+    <div class="timer" id="timer-exam1">Chưa bắt đầu</div>
+    <button class="start-btn" onclick="startTimer(event, 'exam1', 45)">Bắt đầu làm bài</button>
+  </div>
+</div>
+
+
+<div class="exam-item">
+  <div class="exam-header" onclick="toggleExam('exam2', 60)">
+    📗 Đề số 2 
+    <span>⏱ 60 phút</span>
+  </div>
+  <div class="exam-content" id="exam2">
+    <a href="folder_de/de2.pdf" target="_blank">📄 Mở đề</a>
+    <a href="folder_de/de2_dapan.pdf" target="_blank">📘 Mở đề có đáp án</a>
+
+    <div class="timer" id="timer-exam2">Chưa bắt đầu</div>
+    <button class="start-btn" onclick="startTimer(event, 'exam2', 60)">Bắt đầu làm bài</button>
+  </div>
+</div>
+
+
+
+<script>
+let currentOpen = null;
+let timerInterval = null;
+
+function toggleExam(id){
+  const content = document.getElementById(id);
+  const item = content.parentElement;
+
+  if(currentOpen && currentOpen !== content){
+    currentOpen.classList.remove("open");
+    currentOpen.parentElement.classList.remove("active");
+  }
+
+  const isOpen = content.classList.contains("open");
+
+  document.querySelectorAll(".exam-content").forEach(c=>{
+    c.classList.remove("open");
+    c.parentElement.classList.remove("active");
+  });
+
+  if(!isOpen){
+    content.classList.add("open");
+    item.classList.add("active");
+    currentOpen = content;
+  } else {
+    currentOpen = null;
+  }
+}
+
+function startTimer(e, id, minutes){
+  e.stopPropagation();
+
+  if(timerInterval) clearInterval(timerInterval);
+
+  const display = document.getElementById("timer-" + id);
+  let time = minutes * 60;
+
+  timerInterval = setInterval(()=>{
+    let m = Math.floor(time / 60);
+    let s = time % 60;
+
+    display.textContent = "Thời gian còn lại: " + 
+      (m < 10 ? "0" + m : m) + ":" + 
+      (s < 10 ? "0" + s : s);
+
+    if(time <= 0){
+      clearInterval(timerInterval);
+      display.textContent = "⏰ Hết giờ!";
+    }
+
+    time--;
+  },1000);
+}
+</script>
+</html>
