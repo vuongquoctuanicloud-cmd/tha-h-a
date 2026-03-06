@@ -34,6 +34,63 @@
     .hint{ color:#666; font-size:13px; margin-top:10px;}
     /* responsive: ẩn hộp khi màn nhỏ */
     @media(max-width:800px){ #infoBox{ position:static; margin-top:18px; width:auto; } }
+
+  /* ===== Trang trí tiêu đề ===== */
+h1{
+  text-align:center;
+  background:linear-gradient(90deg,#0b57a4,#4a8df6);
+  color:white;
+  padding:14px;
+  border-radius:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* đoạn mô tả */
+p{
+  font-size:15px;
+  line-height:1.5;
+}
+
+/* ===== hiệu ứng phương trình ===== */
+.equation{
+  border-left:6px solid #4a8df6;
+  transition:transform .15s, box-shadow .15s;
+}
+
+.equation:hover{
+  transform:translateY(-3px);
+  box-shadow:0 6px 18px rgba(0,0,0,0.15);
+}
+
+/* ===== hiệu ứng chất hóa học ===== */
+.substance{
+  font-weight:bold;
+  color:#0b57a4;
+}
+
+.substance:hover{
+  background:#dce9ff;
+}
+
+/* ===== hộp thông tin đẹp hơn ===== */
+#infoBox{
+  border-top:5px solid #0b57a4;
+}
+
+#infoBox h3{
+  border-bottom:2px solid #e6ecff;
+  padding-bottom:5px;
+}
+
+/* ===== tiêu đề các phần phản ứng ===== */
+.section-title{
+  font-weight:bold;
+  margin-top:25px;
+  background:#e8f1ff;
+  padding:6px 10px;
+  border-left:5px solid #0b57a4;
+  border-radius:4px;
+}
   </style>
 </head>
 <body>
@@ -197,3 +254,4 @@
   </script>
 </body>
 </html>
+
