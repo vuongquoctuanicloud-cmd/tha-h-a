@@ -34,11 +34,223 @@
     .hint{ color:#666; font-size:13px; margin-top:10px;}
     /* responsive: ẩn hộp khi màn nhỏ */
     @media(max-width:800px){ #infoBox{ position:static; margin-top:18px; width:auto; } }
+  /* ===== Trang trí tiêu đề ===== */
+h1{
+  text-align:center;
+  background:linear-gradient(90deg,#0b57a4,#4a8df6);
+  color:white;
+  padding:14px;
+  border-radius:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* đoạn mô tả */
+p{
+  font-size:15px;
+  line-height:1.5;
+}
+
+/* ===== hiệu ứng phương trình ===== */
+.equation{
+  border-left:6px solid #4a8df6;
+  transition:transform .15s, box-shadow .15s;
+}
+
+.equation:hover{
+  transform:translateY(-3px);
+  box-shadow:0 6px 18px rgba(0,0,0,0.15);
+}
+
+/* ===== hiệu ứng chất hóa học ===== */
+.substance{
+  font-weight:bold;
+  color:#0b57a4;
+}
+
+.substance:hover{
+  background:#dce9ff;
+}
+
+/* ===== hộp thông tin đẹp hơn ===== */
+#infoBox{
+  border-top:5px solid #0b57a4;
+}
+
+#infoBox h3{
+  border-bottom:2px solid #e6ecff;
+  padding-bottom:5px;
+}
+
+/* ===== tiêu đề các phần phản ứng ===== */
+.section-title{
+  font-weight:bold;
+  margin-top:25px;
+  background:#e8f1ff;
+  padding:6px 10px;
+  border-left:5px solid #0b57a4;
+  border-radius:4px;
+}
   </style>
 </head>
 <body>
   <h1>tính chất hóa học</h1>
   <p>Nhấn vào tên chất để xem danh pháp / thông tin.</p>
+  <P>PHẢN ỨNG TRÁNG GƯƠNG </P>
+  <div class="equation">
+  <span class="substance" data-title="Glucozơ" data-name="C6H12O6"
+        data-info="Monosaccarit, có nhóm -CHO nên có tính khử.">
+        C6H12O6
+  </span>
+  +
+  2
+  <span class="substance" data-title="Bạc nitrat amoniac" data-name="[Ag(NH3)2]OH"
+        data-info="Thuốc thử Tollens dùng để nhận biết nhóm -CHO.">
+        [Ag(NH3)2]OH
+  </span>
+  →
+  <span class="substance" data-title="Axit gluconic" data-name="C6H12O7"
+        data-info="Sản phẩm oxi hóa của glucozơ.">
+        C6H12O7
+  </span>
+  +
+  2Ag ↓
+</div>
+  <p>phản ứng tạo phúc xanh</p>
+  <div class="equation">
+  <span class="substance" data-title="Glucozơ" data-name="C6H12O6"
+        data-info="Có nhiều nhóm -OH kề nhau nên tạo phức với Cu(OH)2.">
+        C6H12O6
+  </span>
+  +
+  <span class="substance" data-title="Đồng(II) hiđroxit" data-name="Cu(OH)2"
+        data-info="Chất màu xanh lam, tạo phức với poliancol.">
+        Cu(OH)2
+  </span>
+  →
+  <span class="substance" data-title="Phức đồng glucozơ" data-name="Dung dịch xanh lam"
+        data-info="Dung dịch màu xanh lam đặc trưng.">
+        Phức xanh lam
+  </span>
+</div>
+ <p>PHẢN ỨNG LÊN MEN RƯỢU</p>
+ <div class="equation">
+  <span class="substance" data-title="Glucozơ" data-name="C6H12O6"
+        data-info="Bị lên men nhờ enzym zymase.">
+        C6H12O6
+  </span>
+  →
+  2
+  <span class="substance" data-title="Etanol" data-name="C2H5OH"
+        data-info="Rượu etylic.">
+        C2H5OH
+  </span>
+  +
+  2CO2 ↑
+</div>
+<P> THỦY PHÂN SACCHAROZƠ</P>
+<div class="equation">
+  <span class="substance" data-title="Saccarozơ" data-name="C12H22O11"
+        data-info="Disaccarit, không có tính khử.">
+        C12H22O11
+  </span>
+  +
+  H2O
+  →
+  <span class="substance" data-title="Glucozơ" data-name="C6H12O6"
+        data-info="Monosaccarit có tính khử.">
+        C6H12O6
+  </span>
+  +
+  <span class="substance" data-title="Fructozơ" data-name="C6H12O6"
+        data-info="Monosaccarit nhóm xeton.">
+        C6H12O6
+  </span>
+</div>
+  <P>TINH BỘT + IOT TẠO MÀU</P>
+  <div class="equation">
+  <span class="substance" data-title="Tinh bột" data-name="(C6H10O5)n"
+        data-info="Polisaccarit, tạo màu xanh tím với iot.">
+        (C6H10O5)n
+  </span>
+  +
+  <span class="substance" data-title="Iot" data-name="I2"
+        data-info="Dùng để nhận biết tinh bột.">
+        I2
+  </span>
+  →
+  <span class="substance" data-title="Phức tinh bột - iot" data-name="Màu xanh tím"
+        data-info="Xuất hiện màu xanh tím đặc trưng.">
+        Xanh tím
+  </span>
+</div>
+<h2>I. Khái quát về Carbohydrat</h2>
+<p>
+Carbohydrat là hợp chất hữu cơ chứa C, H, O, thường có công thức gần đúng C<sub>n</sub>(H<sub>2</sub>O)<sub>m</sub>. 
+Chúng gồm ba nhóm chính: monosaccarit, disaccarit và polisaccarit.
+</p>
+
+<h2>II. Tính chất hóa học của Monosaccarit (ví dụ: Glucozơ)</h2>
+
+<h3>1. Tính khử (phản ứng tráng bạc)</h3>
+<p>
+Glucozơ có nhóm -CHO nên có tính khử. Khi tác dụng với dung dịch bạc amoniac,
+xuất hiện lớp bạc kim loại bám trên thành ống nghiệm.
+</p>
+<p>
+C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> + 2[Ag(NH<sub>3</sub>)<sub>2</sub>]OH → 
+C<sub>6</sub>H<sub>12</sub>O<sub>7</sub> + 2Ag ↓ + 3NH<sub>3</sub> + H<sub>2</sub>O
+</p>
+
+<h3>2. Tác dụng với Cu(OH)<sub>2</sub></h3>
+<p>
+Ở nhiệt độ thường, glucozơ hòa tan Cu(OH)<sub>2</sub> tạo dung dịch xanh lam 
+do hình thành phức chất.
+</p>
+
+<h3>3. Phản ứng lên men rượu</h3>
+<p>
+Dưới tác dụng của enzym (men rượu), glucozơ bị lên men tạo etanol và khí CO<sub>2</sub>.
+</p>
+<p>
+C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> → 2C<sub>2</sub>H<sub>5</sub>OH + 2CO<sub>2</sub> ↑
+</p>
+
+<h2>III. Tính chất của Disaccarit (Saccarozơ)</h2>
+
+<h3>1. Phản ứng thủy phân</h3>
+<p>
+Saccarozơ bị thủy phân trong môi trường axit hoặc nhờ enzym tạo thành glucozơ và fructozơ.
+</p>
+<p>
+C<sub>12</sub>H<sub>22</sub>O<sub>11</sub> + H<sub>2</sub>O → 
+C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> + C<sub>6</sub>H<sub>12</sub>O<sub>6</sub>
+</p>
+
+<p>
+Lưu ý: Saccarozơ không có tính khử.
+</p>
+
+<h2>IV. Tính chất của Polisaccarit</h2>
+
+<h3>1. Tinh bột và phản ứng với Iot</h3>
+<p>
+Tinh bột tạo màu xanh tím đặc trưng khi tác dụng với dung dịch iot.
+Đây là phản ứng dùng để nhận biết tinh bột.
+</p>
+
+<h3>2. Phản ứng thủy phân tinh bột</h3>
+<p>
+Tinh bột bị thủy phân từng bước thành dextrin, mantozơ và cuối cùng là glucozơ.
+</p>
+
+<h2>V. Tính chất đặc biệt của Carbohydrat</h2>
+<ul>
+<li>Có nhiều nhóm -OH nên dễ tan trong nước (đối với mono và disaccarit).</li>
+<li>Một số có vị ngọt (glucozơ, fructozơ, saccarozơ).</li>
+<li>Có khả năng tham gia phản ứng oxi hóa - khử.</li>
+<li>Polisaccarit thường không tan và không có vị ngọt.</li>
+<li>Là nguồn cung cấp năng lượng chính cho cơ thể sinh vật.</li>
+</ul>
 
 
 
@@ -80,4 +292,4 @@
     });
   </script>
 </body>
-</html>
+
