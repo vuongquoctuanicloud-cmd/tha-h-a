@@ -122,6 +122,59 @@
 
     /* Khi click anchor, phần tiêu đề sẽ không bị header che */
     section { scroll-margin-top: calc(var(--header-h) + 16px); }
+   
+    /* ===== Hiệu ứng menu ===== */
+.nav-links a:hover,
+.drop-btn:hover{
+  color:#ffd86b;
+  transition:0.2s;
+}
+
+/* ===== Hero đẹp hơn ===== */
+.hero img{
+  transition:transform 0.3s, box-shadow 0.3s;
+}
+
+.hero img:hover{
+  transform:scale(1.03);
+  box-shadow:0 8px 24px rgba(0,0,0,0.2);
+}
+
+/* ===== Card bài học ===== */
+section{
+  transition:transform 0.2s, box-shadow 0.2s;
+  cursor:pointer;
+}
+
+section:hover{
+  transform:translateY(-5px);
+  box-shadow:0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* ===== Tiêu đề bài ===== */
+section h2{
+  color:#2c5aa0;
+  margin-bottom:8px;
+}
+
+/* ===== Thanh highlight bên trái ===== */
+section{
+  border-left:6px solid #5096e6;
+}
+
+/* ===== Hiệu ứng nền nhẹ ===== */
+body{
+  background:linear-gradient(180deg,#f4f6fb,#e9efff);
+}
+
+/* ===== Footer đơn giản ===== */
+footer{
+  text-align:center;
+  padding:20px;
+  margin-top:40px;
+  color:#666;
+  font-size:14px;
+}
   </style>
 </head>
 <body>
@@ -135,8 +188,9 @@
           <button class="drop-btn" aria-haspopup="true" aria-expanded="false">Mục lục ▾</button>
           <div class="dropdown-content" role="menu" aria-label="Mục lục">
             <a href="#bai1" role="menuitem">Bài 1: Este</a>
-            <a href="#bai2" role="menuitem">Bài 2: Axit Cacboxylic</a>
-            <a href="#bai3" role="menuitem">Bài 3: Ancol</a>
+            <a href="#bai2" role="menuitem">Bài 2: carbohydrat</a>
+            <a href="#bai3" role="menuitem">Bài 3: Amin</a>
+            <a href="luyende" role="menuitem">luyện đề:trainning </a>
     
           </div>
         </li>
@@ -173,6 +227,14 @@
   </section>
 </a>
 
+<a href="luyende.html">
+  <section id="luyende">
+    <h2>luyện đề :trainning </h2>
+    <p>đề hóa full hd ko che...</p>
+  </section>
+</a>
+
+
 
   <script>
     // Xử lý mở/đóng dropdown khi click
@@ -195,4 +257,5 @@
 </body>
 </html>
   
+
 
