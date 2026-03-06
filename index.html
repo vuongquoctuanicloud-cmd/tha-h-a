@@ -119,6 +119,7 @@
       border-radius: 8px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     }
+    
 
     /* Khi click anchor, phần tiêu đề sẽ không bị header che */
     section { scroll-margin-top: calc(var(--header-h) + 16px); }
@@ -174,6 +175,44 @@ footer{
   margin-top:40px;
   color:#666;
   font-size:14px;
+}
+#contact form{
+  margin-top:15px;
+}
+
+#contact input,
+#contact textarea{
+  width:100%;
+  padding:10px;
+  border:1px solid #ccc;
+  border-radius:6px;
+  font-size:14px;
+}
+
+#contact textarea{
+  resize:vertical;
+}
+
+#contact button{
+  background:#2c5aa0;
+  color:white;
+  border:none;
+  padding:10px 20px;
+  border-radius:6px;
+  cursor:pointer;
+  font-weight:500;
+}
+
+#contact button:hover{
+  background:#1f4480;
+}
+.contact-img{
+  width:100%;
+  max-width:450px;
+  display:block;
+  margin:15px auto 25px;
+  border-radius:10px;
+  box-shadow:0 6px 16px rgba(0,0,0,0.2);
 }
   </style>
 </head>
@@ -233,6 +272,23 @@ footer{
     <p>đề hóa full hd ko che...</p>
   </section>
 </a>
+<section id="contact">
+  <h2>Liên hệ</h2>
+  <p>Nếu bạn có câu hỏi hoặc muốn đóng góp tài liệu, hãy gửi tin nhắn đến chàng huy animal đến từ thượng quất :))
+  <img src="lienhe.jpg" alt="Ảnh liên hệ" class="contact-img">
+  <form>
+    <label>Họ và tên</label><br>
+    <input type="text" placeholder="Nhập tên của bạn" required><br><br>
+
+    <label>Email</label><br>
+    <input type="email" placeholder="example@gmail.com" required><br><br>
+
+    <label>Nội dung</label><br>
+    <textarea rows="4" placeholder="Viết tin nhắn..."></textarea><br><br>
+
+    <button type="submit">Gửi</button>
+  </form>
+</section>
 
 
 
@@ -256,6 +312,10 @@ footer{
   </script>
 </body>
 </html>
+
   
+
+  
+
 
 
