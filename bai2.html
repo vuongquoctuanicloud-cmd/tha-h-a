@@ -1,296 +1,300 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8" />
-  <title>Phương trình hóa học tương tác</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <style>
-    body{font-family:Arial,Helvetica,sans-serif; padding:20px; background:#f7fbff;}
-    h1{color:#0b57a4}
-    .equation{
-      font-size:24px; margin:18px 0;
-      background:#fff; padding:12px;border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.08); 
-    }
-    /* Thẻ chất bấm được */
-    .substance{
-      cursor:pointer;
-      padding:2px 6px;
-      border-radius:6px;
-      display:inline-block;
-      transition:background .12s, transform .08s;
-    }
-    .substance:hover{ background:#e6f0ff; transform:translateY(-1px); }
-    .coeff{ opacity:0.9; margin-right:4px; }
-    /* Hộp thông tin bên phải */
-    #infoBox{
-      position:fixed; right:18px; top:80px; width:320px;
-      background:#fff; padding:12px 14px; border-radius:10px;
-      box-shadow: 0 8px 30px rgba(10,20,40,0.12);
-      font-size:14px; line-height:1.4;
-    }
-    #infoBox h3{ margin:0 0 6px 0; font-size:16px; color:#0b57a4;}
-    #infoBox p{ margin:6px 0; color:#333; }
-    #infoBox small{ color:#555; display:block; margin-top:8px; }
-    .hint{ color:#666; font-size:13px; margin-top:10px;}
-    /* responsive: ẩn hộp khi màn nhỏ */
-    @media(max-width:800px){ #infoBox{ position:static; margin-top:18px; width:auto; } }
-  /* ===== Trang trí tiêu đề ===== */
+<meta charset="UTF-8">
+<title>Phương trình hóa học tương tác</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+
+body{
+font-family:Arial, Helvetica, sans-serif;
+padding:20px;
+background:#f7fbff;
+}
+
 h1{
-  text-align:center;
-  background:linear-gradient(90deg,#0b57a4,#4a8df6);
-  color:white;
-  padding:14px;
-  border-radius:10px;
-  box-shadow:0 4px 10px rgba(0,0,0,0.15);
+text-align:center;
+background:linear-gradient(90deg,#0b57a4,#4a8df6);
+color:white;
+padding:14px;
+border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.15);
 }
 
-/* đoạn mô tả */
 p{
-  font-size:15px;
-  line-height:1.5;
+font-size:15px;
+line-height:1.5;
 }
 
-/* ===== hiệu ứng phương trình ===== */
 .equation{
-  border-left:6px solid #4a8df6;
-  transition:transform .15s, box-shadow .15s;
+font-size:24px;
+margin:18px 0;
+background:#fff;
+padding:12px;
+border-radius:8px;
+box-shadow:0 2px 6px rgba(0,0,0,0.08);
+border-left:6px solid #4a8df6;
+transition:transform .15s, box-shadow .15s;
 }
 
 .equation:hover{
-  transform:translateY(-3px);
-  box-shadow:0 6px 18px rgba(0,0,0,0.15);
+transform:translateY(-3px);
+box-shadow:0 6px 18px rgba(0,0,0,0.15);
 }
 
-/* ===== hiệu ứng chất hóa học ===== */
 .substance{
-  font-weight:bold;
-  color:#0b57a4;
+cursor:pointer;
+padding:2px 6px;
+border-radius:6px;
+display:inline-block;
+transition:background .12s, transform .08s;
+font-weight:bold;
+color:#0b57a4;
 }
 
 .substance:hover{
-  background:#dce9ff;
+background:#dce9ff;
+transform:translateY(-1px);
 }
 
-/* ===== hộp thông tin đẹp hơn ===== */
 #infoBox{
-  border-top:5px solid #0b57a4;
+position:fixed;
+right:18px;
+top:80px;
+width:320px;
+background:#fff;
+padding:12px 14px;
+border-radius:10px;
+box-shadow:0 8px 30px rgba(10,20,40,0.12);
+font-size:14px;
+line-height:1.4;
+border-top:5px solid #0b57a4;
 }
 
 #infoBox h3{
-  border-bottom:2px solid #e6ecff;
-  padding-bottom:5px;
+margin:0 0 6px 0;
+font-size:16px;
+color:#0b57a4;
+border-bottom:2px solid #e6ecff;
+padding-bottom:5px;
 }
 
-/* ===== tiêu đề các phần phản ứng ===== */
-.section-title{
-  font-weight:bold;
-  margin-top:25px;
-  background:#e8f1ff;
-  padding:6px 10px;
-  border-left:5px solid #0b57a4;
-  border-radius:4px;
+#infoBox p{
+margin:6px 0;
+color:#333;
 }
-  </style>
+
+.hint{
+color:#666;
+font-size:13px;
+margin-top:10px;
+}
+
+@media(max-width:800px){
+#infoBox{
+position:static;
+margin-top:18px;
+width:auto;
+}
+}
+
+</style>
 </head>
+
 <body>
-  <h1>tính chất hóa học</h1>
-  <p>Nhấn vào tên chất để xem danh pháp / thông tin.</p>
-  <P>PHẢN ỨNG TRÁNG GƯƠNG </P>
-  <div class="equation">
-  <span class="substance" data-title="Glucozơ" data-name="C6H12O6"
-        data-info="Monosaccarit, có nhóm -CHO nên có tính khử.">
-        C6H12O6
-  </span>
-  +
-  2
-  <span class="substance" data-title="Bạc nitrat amoniac" data-name="[Ag(NH3)2]OH"
-        data-info="Thuốc thử Tollens dùng để nhận biết nhóm -CHO.">
-        [Ag(NH3)2]OH
-  </span>
-  →
-  <span class="substance" data-title="Axit gluconic" data-name="C6H12O7"
-        data-info="Sản phẩm oxi hóa của glucozơ.">
-        C6H12O7
-  </span>
-  +
-  2Ag ↓
-</div>
-  <p>phản ứng tạo phúc xanh</p>
-  <div class="equation">
-  <span class="substance" data-title="Glucozơ" data-name="C6H12O6"
-        data-info="Có nhiều nhóm -OH kề nhau nên tạo phức với Cu(OH)2.">
-        C6H12O6
-  </span>
-  +
-  <span class="substance" data-title="Đồng(II) hiđroxit" data-name="Cu(OH)2"
-        data-info="Chất màu xanh lam, tạo phức với poliancol.">
-        Cu(OH)2
-  </span>
-  →
-  <span class="substance" data-title="Phức đồng glucozơ" data-name="Dung dịch xanh lam"
-        data-info="Dung dịch màu xanh lam đặc trưng.">
-        Phức xanh lam
-  </span>
-</div>
- <p>PHẢN ỨNG LÊN MEN RƯỢU</p>
- <div class="equation">
-  <span class="substance" data-title="Glucozơ" data-name="C6H12O6"
-        data-info="Bị lên men nhờ enzym zymase.">
-        C6H12O6
-  </span>
-  →
-  2
-  <span class="substance" data-title="Etanol" data-name="C2H5OH"
-        data-info="Rượu etylic.">
-        C2H5OH
-  </span>
-  +
-  2CO2 ↑
-</div>
-<P> THỦY PHÂN SACCHAROZƠ</P>
+
+<h1>Tính chất hóa học</h1>
+
+<p>Nhấn vào tên chất để xem danh pháp / thông tin.</p>
+
+<p><b>PHẢN ỨNG TRÁNG GƯƠNG</b></p>
+
 <div class="equation">
-  <span class="substance" data-title="Saccarozơ" data-name="C12H22O11"
-        data-info="Disaccarit, không có tính khử.">
-        C12H22O11
-  </span>
-  +
-  H2O
-  →
-  <span class="substance" data-title="Glucozơ" data-name="C6H12O6"
-        data-info="Monosaccarit có tính khử.">
-        C6H12O6
-  </span>
-  +
-  <span class="substance" data-title="Fructozơ" data-name="C6H12O6"
-        data-info="Monosaccarit nhóm xeton.">
-        C6H12O6
-  </span>
+
+<span class="substance"
+data-title="Glucozơ"
+data-name="C6H12O6"
+data-info="Monosaccarit, có nhóm -CHO nên có tính khử.">
+
+C6H12O6
+
+</span>
+
++
+
+2
+
+<span class="substance"
+data-title="Bạc nitrat amoniac"
+data-name="[Ag(NH3)2]OH"
+data-info="Thuốc thử Tollens dùng để nhận biết nhóm -CHO.">
+
+[Ag(NH3)2]OH
+
+</span>
+
+→
+
+<span class="substance"
+data-title="Axit gluconic"
+data-name="C6H12O7"
+data-info="Sản phẩm oxi hóa của glucozơ.">
+
+C6H12O7
+
+</span>
+
++
+
+2Ag ↓
+
 </div>
-  <P>TINH BỘT + IOT TẠO MÀU</P>
-  <div class="equation">
-  <span class="substance" data-title="Tinh bột" data-name="(C6H10O5)n"
-        data-info="Polisaccarit, tạo màu xanh tím với iot.">
-        (C6H10O5)n
-  </span>
-  +
-  <span class="substance" data-title="Iot" data-name="I2"
-        data-info="Dùng để nhận biết tinh bột.">
-        I2
-  </span>
-  →
-  <span class="substance" data-title="Phức tinh bột - iot" data-name="Màu xanh tím"
-        data-info="Xuất hiện màu xanh tím đặc trưng.">
-        Xanh tím
-  </span>
+
+<p><b>Phản ứng tạo phức xanh</b></p>
+
+<div class="equation">
+
+<span class="substance"
+data-title="Glucozơ"
+data-name="C6H12O6"
+data-info="Có nhiều nhóm -OH kề nhau nên tạo phức với Cu(OH)2.">
+
+C6H12O6
+
+</span>
+
++
+
+<span class="substance"
+data-title="Đồng(II) hiđroxit"
+data-name="Cu(OH)2"
+data-info="Chất màu xanh lam, tạo phức với poliancol.">
+
+Cu(OH)2
+
+</span>
+
+→
+
+<span class="substance"
+data-title="Phức đồng glucozơ"
+data-name="Dung dịch xanh lam"
+data-info="Dung dịch màu xanh lam đặc trưng.">
+
+Phức xanh lam
+
+</span>
+
 </div>
-<h2>I. Khái quát về Carbohydrat</h2>
-<p>
-Carbohydrat là hợp chất hữu cơ chứa C, H, O, thường có công thức gần đúng C<sub>n</sub>(H<sub>2</sub>O)<sub>m</sub>. 
-Chúng gồm ba nhóm chính: monosaccarit, disaccarit và polisaccarit.
+
+<p><b>PHẢN ỨNG LÊN MEN RƯỢU</b></p>
+
+<div class="equation">
+
+<span class="substance"
+data-title="Glucozơ"
+data-name="C6H12O6"
+data-info="Bị lên men nhờ enzym zymase.">
+
+C6H12O6
+
+</span>
+
+→
+
+2
+
+<span class="substance"
+data-title="Etanol"
+data-name="C2H5OH"
+data-info="Rượu etylic.">
+
+C2H5OH
+
+</span>
+
++
+
+2CO2 ↑
+
+</div>
+
+<p><b>THỦY PHÂN SACCHAROZƠ</b></p>
+
+<div class="equation">
+
+<span class="substance"
+data-title="Saccarozơ"
+data-name="C12H22O11"
+data-info="Disaccarit, không có tính khử.">
+
+C12H22O11
+
+</span>
+
++
+
+H2O
+
+→
+
+<span class="substance"
+data-title="Glucozơ"
+data-name="C6H12O6"
+data-info="Monosaccarit có tính khử.">
+
+C6H12O6
+
+</span>
+
++
+
+<span class="substance"
+data-title="Fructozơ"
+data-name="C6H12O6"
+data-info="Monosaccarit nhóm xeton.">
+
+C6H12O6
+
+</span>
+
+</div>
+
+<aside id="infoBox">
+
+<h3>Thông tin chất</h3>
+
+<p id="infoText">
+Chưa chọn chất. Nhấn vào một chất trong phương trình để xem danh pháp.
 </p>
 
-<h2>II. Tính chất hóa học của Monosaccarit (ví dụ: Glucozơ)</h2>
-
-<h3>1. Tính khử (phản ứng tráng bạc)</h3>
-<p>
-Glucozơ có nhóm -CHO nên có tính khử. Khi tác dụng với dung dịch bạc amoniac,
-xuất hiện lớp bạc kim loại bám trên thành ống nghiệm.
-</p>
-<p>
-C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> + 2[Ag(NH<sub>3</sub>)<sub>2</sub>]OH → 
-C<sub>6</sub>H<sub>12</sub>O<sub>7</sub> + 2Ag ↓ + 3NH<sub>3</sub> + H<sub>2</sub>O
+<p class="hint">
+Nhấn vào chất trong phương trình để xem thông tin.
 </p>
 
-<h3>2. Tác dụng với Cu(OH)<sub>2</sub></h3>
-<p>
-Ở nhiệt độ thường, glucozơ hòa tan Cu(OH)<sub>2</sub> tạo dung dịch xanh lam 
-do hình thành phức chất.
-</p>
+</aside>
 
-<h3>3. Phản ứng lên men rượu</h3>
-<p>
-Dưới tác dụng của enzym (men rượu), glucozơ bị lên men tạo etanol và khí CO<sub>2</sub>.
-</p>
-<p>
-C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> → 2C<sub>2</sub>H<sub>5</sub>OH + 2CO<sub>2</sub> ↑
-</p>
+<script>
 
-<h2>III. Tính chất của Disaccarit (Saccarozơ)</h2>
+const subs=document.querySelectorAll('.substance')
+const infoText=document.getElementById('infoText')
 
-<h3>1. Phản ứng thủy phân</h3>
-<p>
-Saccarozơ bị thủy phân trong môi trường axit hoặc nhờ enzym tạo thành glucozơ và fructozơ.
-</p>
-<p>
-C<sub>12</sub>H<sub>22</sub>O<sub>11</sub> + H<sub>2</sub>O → 
-C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> + C<sub>6</sub>H<sub>12</sub>O<sub>6</sub>
-</p>
+subs.forEach(s=>{
 
-<p>
-Lưu ý: Saccarozơ không có tính khử.
-</p>
+s.addEventListener('click',()=>{
 
-<h2>IV. Tính chất của Polisaccarit</h2>
+const title=s.dataset.title||s.textContent
+const info=s.dataset.info||'Chưa có thông tin'
 
-<h3>1. Tinh bột và phản ứng với Iot</h3>
-<p>
-Tinh bột tạo màu xanh tím đặc trưng khi tác dụng với dung dịch iot.
-Đây là phản ứng dùng để nhận biết tinh bột.
-</p>
+infoText.innerHTML=
+"<b>"+title+"</b><br><br>"+info
 
-<h3>2. Phản ứng thủy phân tinh bột</h3>
-<p>
-Tinh bột bị thủy phân từng bước thành dextrin, mantozơ và cuối cùng là glucozơ.
-</p>
+})
 
-<h2>V. Tính chất đặc biệt của Carbohydrat</h2>
-<ul>
-<li>Có nhiều nhóm -OH nên dễ tan trong nước (đối với mono và disaccarit).</li>
-<li>Một số có vị ngọt (glucozơ, fructozơ, saccarozơ).</li>
-<li>Có khả năng tham gia phản ứng oxi hóa - khử.</li>
-<li>Polisaccarit thường không tan và không có vị ngọt.</li>
-<li>Là nguồn cung cấp năng lượng chính cho cơ thể sinh vật.</li>
-</ul>
+})
 
+</script>
 
-
-  
-    <!-- Hộp hiển thị thông tin -->
-  <aside id="infoBox" aria-live="polite">
-    <h3>Thông tin chất</h3>
-    <p id="infoText">Chưa chọn chất. Nhấn vào một chất trong phương trình để xem danh pháp.</p>
-    <small class="hint">Bạn có thể thêm chất mới bằng thẻ: <code>&lt;span class="substance" data-title="..." data-info="..."&gt;H&lt;sub&gt;2&lt;/sub&gt;&lt;/span&gt;</code></small>
-  </aside>
-
-  <script>
-    // Lấy tất cả thẻ .substance
-    const subs = document.querySelectorAll('.substance');
-    const infoText = document.getElementById('infoText');
-
-    subs.forEach(s => {
-      // click: hiển thị dữ liệu
-      s.addEventListener('click', () => {
-        const title = s.dataset.title || s.dataset.name || s.textContent.trim();
-        const info = s.dataset.info || 'Chưa có thông tin cho chất này.';
-        const name = s.dataset.name || s.textContent.trim();
-
-        infoText.innerHTML = 
-          `<strong>${title}</strong> <span style="color:#666">(${name})</span>
-          <p style="margin-top:8px">${info}</p>`;
-
-        // thêm hiệu ứng chọn
-        subs.forEach(x => x.style.outline = '');
-        s.style.outline = '2px solid rgba(11,87,164,0.18)';
-        s.style.borderRadius = '6px';
-      });
-
-      // optional: Enter key để truy cập (tốt cho accessibility)
-      s.tabIndex = 0;
-      s.addEventListener('keydown', (e) => {
-        if(e.key === 'Enter' || e.key === ' ') { s.click(); e.preventDefault(); }
-      });
-    });
-  </script>
 </body>
 </html>
-
