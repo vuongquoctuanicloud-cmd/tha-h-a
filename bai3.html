@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <title>Phương trình hóa học tương tác</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif; padding:20px; background:#f7fbff;}
+    h1{color:#0b57a4}
+    .equation{
+      font-size:24px; margin:18px 0;
+      background:#fff; padding:12px;border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.08); 
+    }
+    /* Thẻ chất bấm được */
+    .substance{
+      cursor:pointer;
+      padding:2px 6px;
+      border-radius:6px;
+      display:inline-block;
+      transition:background .12s, transform .08s;
+    }
+    .substance:hover{ background:#e6f0ff; transform:translateY(-1px); }
+    .coeff{ opacity:0.9; margin-right:4px; }
+    /* Hộp thông tin bên phải */
+    #infoBox{
+      position:fixed; right:18px; top:80px; width:320px;
+      background:#fff; padding:12px 14px; border-radius:10px;
+      box-shadow: 0 8px 30px rgba(10,20,40,0.12);
+      font-size:14px; line-height:1.4;
+    }
+    #infoBox h3{ margin:0 0 6px 0; font-size:16px; color:#0b57a4;}
+    #infoBox p{ margin:6px 0; color:#333; }
+    #infoBox small{ color:#555; display:block; margin-top:8px; }
+    .hint{ color:#666; font-size:13px; margin-top:10px;}
+    /* responsive: ẩn hộp khi màn nhỏ */
+    @media(max-width:800px){ #infoBox{ position:static; margin-top:18px; width:auto; } }
+   /* ===== Trang trí tiêu đề ===== */
+h1{
+  text-align:center;
+  background:linear-gradient(90deg,#0b57a4,#4a8df6);
+  color:white;
+  padding:14px;
+  border-radius:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* đoạn mô tả */
+p{
+  font-size:15px;
+  line-height:1.5;
+}
+
+/* ===== hiệu ứng phương trình ===== */
+.equation{
+  border-left:6px solid #4a8df6;
+  transition:transform .15s, box-shadow .15s;
+}
+
+.equation:hover{
+  transform:translateY(-3px);
+  box-shadow:0 6px 18px rgba(0,0,0,0.15);
+}
+
+/* ===== hiệu ứng chất hóa học ===== */
+.substance{
+  font-weight:bold;
+  color:#0b57a4;
+}
+
+.substance:hover{
+  background:#dce9ff;
+}
+
+/* ===== hộp thông tin đẹp hơn ===== */
+#infoBox{
+  border-top:5px solid #0b57a4;
+}
+
+#infoBox h3{
+  border-bottom:2px solid #e6ecff;
+  padding-bottom:5px;
+}
+
+/* ===== tiêu đề các phần phản ứng ===== */
+.section-title{
+  font-weight:bold;
+  margin-top:25px;
+  background:#e8f1ff;
+  padding:6px 10px;
+  border-left:5px solid #0b57a4;
+  border-radius:4px;
+}
+body{
+  background:linear-gradient(180deg,#f7fbff,#eef5ff);
+}
+
+/* ===== khung nội dung chính ===== */
+main{
+  max-width:900px;
+  margin:auto;
+}
+
+/* ===== tiêu đề phản ứng ===== */
+h2{
+  color:#0b57a4;
+  margin-top:28px;
+  border-bottom:2px solid #e6ecff;
+  padding-bottom:6px;
+}
+
+/* ===== tiêu đề phụ ===== */
+h3{
+  color:#2a4d8f;
+  margin-top:18px;
+}
+
+/* ===== hiệu ứng mũi tên phản ứng ===== */
+.equation{
+  letter-spacing:1px;
+}
+
+/* ===== highlight khi chọn chất ===== */
+.substance:active{
+  transform:scale(0.96);
+}
+
+/* ===== hộp info animation ===== */
+#infoBox{
+  transition:transform .2s, box-shadow .2s;
+}
+
+#infoBox:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 32px rgba(0,0,0,0.18);
+}
+
+/* ===== scrollbar nhẹ ===== */
+::-webkit-scrollbar{
+  width:8px;
+}
+::-webkit-scrollbar-thumb{
+  background:#b9d0ff;
+  border-radius:10px;
+}
+  </style>
+</head>
+<body>
+  <h1>tính chất hóa học</h1>
+  <p>Nhấn vào tên chất để xem danh pháp / thông tin.</p>
+   <h2>1. Tính bazơ của Amin</h2>
+
+<div class="equation">
+  <span class="substance"
+        data-title="Metylamin"
+        data-name="CH3NH2"
+        data-info="Amin bậc I, có tính bazơ yếu do N có cặp e tự do.">
+        CH3NH2
+  </span>
+  +
+  H2O
+  ⇌
+  <span class="substance"
+        data-title="Ion metylamoni"
+        data-name="CH3NH3+"
+        data-info="Ion tạo thành khi amin nhận proton từ nước.">
+        CH3NH3+
+  </span>
+  +
+  OH⁻
+</div>
+
+
+<div class="equation">
+  <span class="substance"
+        data-title="Metylamin"
+        data-name="CH3NH2"
+        data-info="Phản ứng với axit tạo muối amoni.">
+        CH3NH2
+  </span>
+  +
+  <span class="substance"
+        data-title="Axit clohiđric"
+        data-name="HCl"
+        data-info="Axit mạnh, phản ứng với amin tạo muối.">
+        HCl
+  </span>
+  →
+  <span class="substance"
+        data-title="Metylamoni clorua"
+        data-name="CH3NH3Cl"
+        data-info="Muối amoni tạo thành từ amin và axit.">
+        CH3NH3Cl
+  </span>
+</div>
+
+
+<h2>2. Phản ứng với HNO2</h2>
+
+<div class="equation">
+  <span class="substance"
+        data-title="Amin bậc I"
+        data-name="R-NH2"
+        data-info="Amin no, mạch hở bậc I phản ứng giải phóng khí nitơ.">
+        R-NH2
+  </span>
+  +
+  <span class="substance"
+        data-title="Axit nitrơ"
+        data-name="HNO2"
+        data-info="Tác dụng với amin bậc I tạo rượu và khí N2.">
+        HNO2
+  </span>
+  →
+  R-OH + N2 ↑ + H2O
+</div>
+
+
+<h2>3. Phản ứng của Anilin (amin thơm)</h2>
+
+<div class="equation">
+  <span class="substance"
+        data-title="Anilin"
+        data-name="C6H5NH2"
+        data-info="Amin thơm bậc I, làm hoạt hóa vòng benzen.">
+        C6H5NH2
+  </span>
+  +
+  3
+  <span class="substance"
+        data-title="Brom"
+        data-name="Br2"
+        data-info="Phản ứng thế vào vòng benzen.">
+        Br2
+  </span>
+  →
+  <span class="substance"
+        data-title="2,4,6-tribromoanilin"
+        data-name="C6H2Br3NH2"
+        data-info="Kết tủa trắng đặc trưng khi cho anilin tác dụng với brom.">
+        C6H2Br3NH2
+  </span>
+  ↓
+  + 3HBr
+</div>
+
+
+<div class="equation">
+  <span class="substance"
+        data-title="Anilin"
+        data-name="C6H5NH2"
+        data-info="Tác dụng với HNO2 ở nhiệt độ thấp tạo muối điazoni.">
+        C6H5NH2
+  </span>
+  +
+  <span class="substance"
+        data-title="Axit nitrơ"
+        data-name="HNO2"
+        data-info="Tạo muối điazoni với amin thơm bậc I.">
+        HNO2
+  </span>
+  +
+  HCl
+  →
+  <span class="substance"
+        data-title="Muối benzen điazoni clorua"
+        data-name="C6H5N2Cl"
+        data-info="Hợp chất trung gian quan trọng trong tổng hợp phẩm nhuộm azo.">
+        C6H5N2Cl
+  </span>
+  + 2H2O
+</div>
+
+
+<h2>4. Phản ứng cháy</h2>
+
+<div class="equation">
+  4
+  <span class="substance"
+        data-title="Metylamin"
+        data-name="CH3NH2"
+        data-info="Cháy trong oxi tạo CO2, H2O và N2.">
+        CH3NH2
+  </span>
+  +
+  9O2
+  →
+  4CO2 + 10H2O + 2N2
+</div>
+<h2>5. Phân biệt độ bazơ của Amin</h2>
+
+<p>Mức độ bazơ phụ thuộc vào khả năng đẩy e của nhóm ankyl và ảnh hưởng của môi trường.</p>
+
+<h3>1. Trong môi trường nước (amin no, mạch hở)</h3>
+
+<h2>5. So sánh độ bazơ của Amin</h2>
+
+<p>Độ bazơ phụ thuộc vào: hiệu ứng đẩy e (+I), liên hợp, cản trở không gian và môi trường (nước hay pha khí).</p>
+
+<h3>1️⃣ Amin no, mạch hở trong nước</h3>
+
+<div class="equation">
+Độ bazơ:
+<span class="substance"
+data-title="Đimetylamin"
+data-name="(CH3)2NH"
+data-info="Mạnh nhất trong nước do có 2 nhóm ankyl đẩy e và được solvat hóa tốt.">
+(CH<sub>3</sub>)<sub>2</sub>NH
+</span>
+>
+<span class="substance"
+data-title="Metylamin"
+data-name="CH3NH2"
+data-info="Có 1 nhóm ankyl đẩy e nên bazơ khá mạnh.">
+CH<sub>3</sub>NH<sub>2</sub>
+</span>
+>
+<span class="substance"
+data-title="Trimetylamin"
+data-name="(CH3)3N"
+data-info="Bị cản trở không gian, ion tạo thành khó được nước bao quanh nên yếu hơn bậc II.">
+(CH<sub>3</sub>)<sub>3</sub>N
+</span>
+>
+<span class="substance"
+data-title="Amoniac"
+data-name="NH3"
+data-info="Không có nhóm ankyl đẩy e nên bazơ yếu nhất trong dãy này.">
+NH<sub>3</sub>
+</span>
+</div>
+
+<p><b>Kết luận trong nước:</b> bậc II > bậc I > bậc III > NH<sub>3</sub></p>
+
+
+<h3>2️⃣ Trong pha khí</h3>
+
+<div class="equation">
+Độ bazơ:
+<span class="substance"
+data-title="Trimetylamin"
+data-name="(CH3)3N"
+data-info="Mạnh nhất trong pha khí do hiệu ứng +I tăng theo số nhóm ankyl.">
+(CH<sub>3</sub>)<sub>3</sub>N
+</span>
+>
+<span class="substance"
+data-title="Đimetylamin"
+data-name="(CH3)2NH"
+data-info="Có 2 nhóm ankyl đẩy e.">
+(CH<sub>3</sub>)<sub>2</sub>NH
+</span>
+>
+<span class="substance"
+data-title="Metylamin"
+data-name="CH3NH2"
+data-info="Chỉ có 1 nhóm ankyl.">
+CH<sub>3</sub>NH<sub>2</sub>
+</span>
+>
+NH<sub>3</sub>
+</div>
+
+<p><b>Kết luận trong pha khí:</b> bậc III > bậc II > bậc I > NH<sub>3</sub></p>
+
+
+<h3>3️⃣ So sánh amin no và amin thơm</h3>
+
+<div class="equation">
+<span class="substance"
+data-title="Metylamin"
+data-name="CH3NH2"
+data-info="Amin no. Cặp e tự do trên N không bị liên hợp nên bazơ mạnh.">
+CH<sub>3</sub>NH<sub>2</sub>
+</span>
+>
+<span class="substance"
+data-title="Anilin"
+data-name="C6H5NH2"
+data-info="Cặp e trên N liên hợp với vòng benzen → mật độ e giảm → bazơ yếu hơn amin no.">
+C<sub>6</sub>H<sub>5</sub>NH<sub>2</sub>
+</span>
+>
+<span class="substance"
+data-title="p-Nitroanilin"
+data-name="O2NC6H4NH2"
+data-info="Nhóm -NO2 hút e mạnh (-I, -M) làm giảm mạnh tính bazơ.">
+O<sub>2</sub>N–C<sub>6</sub>H<sub>4</sub>–NH<sub>2</sub>
+</span>
+</div>
+
+<p><b>Kết luận:</b> amin no > anilin > anilin có nhóm hút e.</p>
+
+
+<h3>4️⃣ Ảnh hưởng của nhóm thế trên vòng benzen</h3>
+
+<div class="equation">
+<span class="substance"
+data-title="p-Metylanilin"
+data-name="CH3C6H4NH2"
+data-info="Nhóm -CH3 đẩy e (+I) làm tăng tính bazơ so với anilin.">
+CH<sub>3</sub>–C<sub>6</sub>H<sub>4</sub>–NH<sub>2</sub>
+</span>
+>
+<span class="substance"
+data-title="Anilin"
+data-name="C6H5NH2"
+data-info="Bazơ yếu do liên hợp.">
+C<sub>6</sub>H<sub>5</sub>NH<sub>2</sub>
+</span>
+>
+<span class="substance"
+data-title="p-Nitroanilin"
+data-name="O2NC6H4NH2"
+data-info="Nhóm -NO2 hút e rất mạnh nên bazơ yếu nhất.">
+O<sub>2</sub>N–C<sub>6</sub>H<sub>4</sub>–NH<sub>2</sub>
+</span>
+</div>
+
+<p>
+📌 Nhóm đẩy e (+I, +M) → tăng bazơ. <br>
+📌 Nhóm hút e (-I, -M) → giảm bazơ.
+</p>
+
+ 
+
+
+
+
+
+    <!-- Hộp hiển thị thông tin -->
+  <aside id="infoBox" aria-live="polite">
+    <h3>Thông tin chất</h3>
+    <p id="infoText">Chưa chọn chất. Nhấn vào một chất trong phương trình để xem danh pháp.</p>
+    <small class="hint">Bạn có thể thêm chất mới bằng thẻ: <code>&lt;span class="substance" data-title="..." data-info="..."&gt;H&lt;sub&gt;2&lt;/sub&gt;&lt;/span&gt;</code></small>
+  </aside>
+
+  <script>
+    // Lấy tất cả thẻ .substance
+    const subs = document.querySelectorAll('.substance');
+    const infoText = document.getElementById('infoText');
+
+    subs.forEach(s => {
+      // click: hiển thị dữ liệu
+      s.addEventListener('click', () => {
+        const title = s.dataset.title || s.dataset.name || s.textContent.trim();
+        const info = s.dataset.info || 'Chưa có thông tin cho chất này.';
+        const name = s.dataset.name || s.textContent.trim();
+
+        infoText.innerHTML = 
+          `<strong>${title}</strong> <span style="color:#666">(${name})</span>
+          <p style="margin-top:8px">${info}</p>`;
+
+        // thêm hiệu ứng chọn
+        subs.forEach(x => x.style.outline = '');
+        s.style.outline = '2px solid rgba(11,87,164,0.18)';
+        s.style.borderRadius = '6px';
+      });
+
+      // optional: Enter key để truy cập (tốt cho accessibility)
+      s.tabIndex = 0;
+      s.addEventListener('keydown', (e) => {
+        if(e.key === 'Enter' || e.key === ' ') { s.click(); e.preventDefault(); }
+      });
+    });
+  </script>
+</body>
+</html>
